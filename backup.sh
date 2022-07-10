@@ -29,7 +29,7 @@ create_bucket() {
         --public-access-block-configuration \
         "BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true"
 
-    # enable versioning for objects in the bucket 
+    # enable versioning for objects in the bucket
     s3api put-bucket-versioning --versioning-configuration Status=Enabled
 
     # encrypt objects in the bucket
@@ -41,12 +41,17 @@ create_bucket() {
 ensure_bucket_exists() {
     if bucket_exists; then
         return
-    fi    
+    fi
     create_bucket
 }
 
-pg_dump_database() {
-    pg_dump  --no-owner --no-privileges --clean --if-exists --quote-all-identifiers "$DATABASE_URL"
+mysqldump_database() {
+    mysqldump \
+        -h $MYSQL_HOST \
+        -u $MYSQL_USER \
+        --password=$MYSQL_PASSWORD \
+        --single-transaction --no-tablespaces \
+        --databases "$MYSQL_DATABASE"
 }
 
 upload_to_bucket() {
@@ -58,7 +63,7 @@ upload_to_bucket() {
 main() {
     ensure_bucket_exists
     echo "Taking backup and uploading it to S3..."
-    pg_dump_database | gzip | upload_to_bucket
+    mysqldump_database | gzip | upload_to_bucket
     echo "Done."
 }
 

@@ -1,12 +1,12 @@
 FROM amazon/aws-cli:latest
-ARG POSTGRES_VERSION
+ARG MYSQL_VERSION
 
 RUN yum update -y \
     && yum install -y gzip
 
 WORKDIR /scripts
-COPY install-pg-dump.sh .
-RUN "/scripts/install-pg-dump.sh"
+COPY install-mysqldump.sh .
+RUN "/scripts/install-mysqldump.sh"
 
 COPY backup.sh .
 ENTRYPOINT [ "/scripts/backup.sh" ]

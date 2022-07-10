@@ -7,14 +7,30 @@ services:
     plan: standard
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: replace-with-your-postgres-instance-name
-          property: connectionString
+      - key: MYSQL_HOST
+        fromService:
+          name: replace-with-name-of-your-mysql-private-service
+          type: pserv
+          property: host
+      - key: MYSQL_DATABASE
+        fromService:
+          name: replace-with-name-of-your-mysql-private-service
+          type: pserv
+          envVarKey: MYSQL_DATABASE
+      - key: MYSQL_USER
+        fromService:
+          name: replace-with-name-of-your-mysql-private-service
+          type: pserv
+          envVarKey: MYSQL_USER
+      - key: MYSQL_PASSWORD
+        fromService:
+          name: replace-with-name-of-your-mysql-private-service
+          type: pserv
+          envVarKey: MYSQL_PASSWORD
       # pick the region closest to your database
       # For example, us-west-2 for the Oregon region
       - key: AWS_REGION
-        sync: false 
+        sync: false
       # A globally unique name for your bucket
       # For example, <your-username>-<database name>-render-postgres-backups
       - key: S3_BUCKET_NAME
@@ -24,8 +40,7 @@ services:
         sync: false
       - key: AWS_SECRET_ACCESS_KEY
         sync: false
-      # Postgres version of your Postgres instance 
-      # For example, 14
-      - key: POSTGRES_VERSION
+      # Postgres version of your MySQL database 
+      # For example, 8.0
+      - key: MYSQL_VERSION
         sync: false
-

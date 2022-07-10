@@ -1,10 +1,7 @@
-# Deploy a Cron Job to Backup PostgreSQL to Amazon S3
+# Deploy a Cron Job to Backup MySQL to Amazon S3
 
-This repo can be used to deploy a [Cron Job](https://render.com/docs/cronjobs) on [Render](https://render.com) to backup a PostgreSQL instance to Amazon S3.
+This is a work in progress 🚧
 
-Fork this repo and click the button below to deploy.
+Most of this example code was copied from: https://github.com/render-examples/postgres-s3-backups
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-
-See the guide at https://render.com/docs/backup-postgresql-to-s3 for more information.
-
+This repo can be used to deploy a [Cron Job](https://render.com/docs/cronjobs) on [Render](https://render.com) to backup a MySQL database to Amazon S3.
