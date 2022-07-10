@@ -1,5 +1,5 @@
 services:
-  - name: backup-db
+  - name: backup-mysql-database
     type: cron
     schedule: "0 3 * * *"
     region: oregon
