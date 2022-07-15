@@ -45,6 +45,12 @@ ensure_bucket_exists() {
     create_bucket
 }
 
+# `--single-transaction` "...the dump is a snapshot of the databases at the instant the dump started, regardless of how long the dump takes...":
+# https://stackoverflow.com/questions/41683158/mysqldump-single-transaction-option
+#
+# `--no-tablespaces` helps to avoid an “access denied” error:
+# https://dba.stackexchange.com/questions/271981/access-denied-you-need-at-least-one-of-the-process-privileges-for-this-ope
+#
 mysqldump_database() {
     mysqldump \
         -h $MYSQL_HOST \
