@@ -40,7 +40,7 @@ services:
         sync: false
       - key: AWS_SECRET_ACCESS_KEY
         sync: false
-      # Postgres version of your MySQL database 
+      # Version of your MySQL database 
       # For example, 8.0
       - key: MYSQL_VERSION
         sync: false
